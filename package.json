@@ -1,0 +1,25 @@
+{
+  "name": "vuue",
+  "version": "1.0.0",
+  "description": "简单的vue",
+  "main": "src/index",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youzaiyouzai666/vuue.git"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "caoyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youzaiyouzai666/vuue/issues"
+  },
+  "homepage": "https://github.com/youzaiyouzai666/vuue#readme",
+  "dependencies": {
+    "webpack": "^3.6.0"
+  }
+}
