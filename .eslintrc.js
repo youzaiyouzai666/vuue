@@ -8,9 +8,6 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 6
     },
-    globals      : {
-        Vuue: false
-    },
     rules        : {
         // 禁用 console
         "no-console"                : 1,
