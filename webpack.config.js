@@ -1,28 +1,36 @@
-const path = require('path');
+const path               = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-module.exports = {
-    entry:'./src/index.js',
-    output:{
-        filename:'./dist/vuue.js'
+// const UglifyJSPlugin     = require('uglifyjs-webpack-plugin');
+module.exports           = {
+    entry    : './src/index.js',
+    output   : {
+        filename: './dist/vuue.js'
     },
-    devtool: 'inline-source-map',//开始调试
-    module: {
+    devtool  : 'inline-source-map',//开始调试
+    module   : {
         rules: [
             {
-                test:/.js$/,
-                use: {
+                test   : /\.js$/,
+                enforce: "pre",
+                loader : "eslint-loader",
+                exclude: /node_modules/
+            },
+            {
+                test   : /.js$/,
+                use    : {
                     loader: "babel-loader",
-                }
+                },
+                exclude: /node_modules/
             }
         ]
     },
     devServer: {
-        contentBase: [path.join(__dirname, "dist"),path.join(__dirname, "example")],
-        compress: true,
-        openPage: 'index.html',
-        port: 8080
+        contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "example")],
+        compress   : true,
+        openPage   : 'index.html',
+        port       : 8080
     },
-    plugins: [
+    plugins  : [
         new CleanWebpackPlugin(['dist']),//清理 /dist 文件夹
     ]
 };

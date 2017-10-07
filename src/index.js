@@ -7,6 +7,6 @@ Vuue.prototype = {
     ...require('./instance/init'),
     ...require('./instance/compile'),
     ...require('./api/lifecycle')
+
 };
-console.log('I get called from print.js!');
-module.exports = Vuue;
+module.exports = window.Vuue =  Vuue;
