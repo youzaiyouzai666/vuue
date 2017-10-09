@@ -45,5 +45,4 @@ exports._compileText = function (node) {
 
     node.nodeValue = nodeValue;
 
-
 };

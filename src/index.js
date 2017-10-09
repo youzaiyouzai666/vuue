@@ -3,10 +3,11 @@ function Vuue (options){
 }
 
 Vuue.prototype = {
-    construct: Vuue,
+    constructor: Vuue,
     ...require('./instance/init'),
     ...require('./instance/compile'),
-    ...require('./api/lifecycle')
-
+    ...require('./api/lifecycle'),
+    observer: {...require('./observer/observer')}
 };
+console.log('Vuue:',Vuue);
 module.exports = window.Vuue =  Vuue;
