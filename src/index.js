@@ -9,5 +9,4 @@ Vuue.prototype = {
     ...require('./api/lifecycle'),
     observer: {...require('./observer/observer')}
 };
-console.log('Vuue:',Vuue);
 module.exports = window.Vuue =  Vuue;
