@@ -1,3 +1,8 @@
+/**
+ *
+ * @param options
+ * @constructor
+ */
 function Vuue (options){
     this._init(options);
 }
@@ -9,4 +14,4 @@ Vuue.prototype = {
     ...require('./api/lifecycle'),
     observer: {...require('./observer/observer')}
 };
-module.exports = window.Vuue =  Vuue;
+module.exports = window.Vuue =  Vuue;//todo 这个全局变量这么写太low了

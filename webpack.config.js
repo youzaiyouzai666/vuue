@@ -21,7 +21,7 @@ module.exports           = {
                     loader: "babel-loader",
                 },
                 exclude: /node_modules/
-            }
+            },
         ]
     },
     devServer: {
@@ -32,5 +32,7 @@ module.exports           = {
     },
     plugins  : [
         new CleanWebpackPlugin(['dist']),//清理 /dist 文件夹
+        // new UglifyJSPlugin({sourceMap: true}),//压缩
+
     ]
 };

@@ -20,7 +20,6 @@ class Observer {
         }
     }
 
-
     link() {
 
     }
@@ -31,17 +30,16 @@ class Observer {
                 let val = obj[key];
 
                 // 递归
-                this.observe(key, val);
+                // this.observe(key, val);
                 this.convert(key, val);
 
             }
         }
     }
 
-    observe(key, val){
+    observe(key, val) {
         let ob = Observer.create(val);
         if (!ob) return;
-        debugger;
         ob.parent = {
             key,
             ob: this
@@ -59,7 +57,6 @@ class Observer {
             set         : function (newVal) {
                 if (newVal === val) return;
                 val = newVal;
-                debugger;
                 ob.notify('set', key, newVal);
             }
         })
@@ -85,8 +82,8 @@ class Observer {
         })
     }
 
-    notify(event, ...arg){
-        this.emit(event,...arg);
+    notify(event, ...arg) {
+        this.emit(event, ...arg);
         //todo 处理父类
         /*let parent = this.parent;
         if (!parent) return;
@@ -108,8 +105,7 @@ Observer.create = function (value) {
     } else if (typeof value === 'object') {
         return new Observer(value, OBJECT);
     }
-
-}
+};
 
 
 module.exports = Observer;
