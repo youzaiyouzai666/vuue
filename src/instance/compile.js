@@ -1,9 +1,8 @@
 exports._compile     = function () {
     this.fragment = document.createDocumentFragment();
-    this._compileNode(this.$template);//todo
+    this._compileNode(this.$template);
     this.$el.innerHTML = '';
     this.fragment.childNodes.forEach((child) =>{
-        "use strict";
         this.$el.appendChild(child.cloneNode(true));
     })
 };
@@ -41,13 +40,23 @@ exports._compileText = function (node) {
 
     if (!nodeValue || nodeValue === '') return;
 
-    const patt = /{{\w+}}/g;
+    const patt = /{{[\w|/.]+}}/g;
     let ret    = nodeValue.match(patt);
     if (!ret) return;
 
     ret.forEach(value => {
-        const property = value.replace(/[{}]/g, '');
-        nodeValue      = value.replace(value, this.$data[property]);
+        let property = value.replace(/[{}]/g, '');
+        let attr = property.split('.');
+        for(let i=0; i<attr.length; i++){
+            const FIREST = 0;
+            if(i===FIREST){
+                property= this.$data[attr[i]];
+            }else{
+                property = property[attr[i]];
+            }
+
+        }
+        nodeValue      = nodeValue.replace(value,property);
     }, this);
 
     //node.nodeValue = nodeValue;

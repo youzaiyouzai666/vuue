@@ -32,7 +32,7 @@ module.exports = {
         //禁止重新声明变量
         "no-redeclare"              : 2,
         //禁止使用魔术数字
-        "no-magic-numbers"          : 2,
+        "no-magic-numbers"          : ["error", { "ignoreArrayIndexes": true }],
         //禁止删除变量
         "no-delete-var"             : 2,
         //需要把立即执行的函数包裹起来
