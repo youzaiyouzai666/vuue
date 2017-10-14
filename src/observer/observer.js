@@ -46,6 +46,11 @@ class Observer {
         };
     }
 
+    /**
+     * set与get方法绑定，可以理解为动态绑定的开关处
+     * @param key
+     * @param val
+     */
     convert(key, val) {
         const ob = this;
         Object.defineProperty(this.value, key, {

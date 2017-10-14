@@ -9,7 +9,6 @@ exports._init = function (options) {
     this.observer = this.observer.create(this.$data);
 
     // this.observer.on('set', this.$mount.bind(this));
-    debugger;
     this.observer.on('set', _updateBindingAt.bind(this));
 
     // _updateBindingAt();
