@@ -1,3 +1,4 @@
+import * as _ from '../util/index';
 import Directive from '../directive'
 
 const NODE_TYPE_ELE  = 1;
@@ -59,7 +60,7 @@ exports._compileText = function (node) {
     if (!ret) return;
 
     ret.forEach(value => {
-        let el = document.createTextNode('aaaaa');
+        let el = document.createTextNode('');
         node.parentNode.insertBefore(el, node);//todo 此处只对整个文本作用域处理，
         let property = value.replace(/[{}]/g, '');
         // let attr     = property.split('.');
@@ -77,15 +78,13 @@ exports._compileText = function (node) {
         this._bindDirective(property,el);
     }, this);
 
-
-    node.parentNode.removeChild(node);//删除原来的DOM
+    _.remove(node);//删除原来的DOM
     //node.nodeValue = nodeValue;
     // this.currentNode.appendChild(document.createTextNode(nodeValue));
 
 };
 
 exports._bindDirective = function (expression, node) {
-    debugger;
     let dirs = this._directives;
     dirs.push(
         new Directive(node, this, expression)
