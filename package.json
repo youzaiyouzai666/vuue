@@ -4,9 +4,9 @@
   "description": "简单的vue",
   "main": "src/index",
   "scripts": {
-    "test": "test",
     "start": "webpack-dev-server --open",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test": "mocha --compilers js:babel-core/register -recursive"
   },
   "repository": {
     "type": "git",
