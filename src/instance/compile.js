@@ -1,5 +1,6 @@
 import * as _ from '../util/index';
-import Directive from '../directive'
+import Directive from '../directive';
+import textParser from '../parses/text';
 
 const NODE_TYPE_ELE  = 1;
 const NODE_TYPE_TEXT = 3;
@@ -10,12 +11,8 @@ const NODE_TYPE_TEXT = 3;
  */
 exports._compile = function () {
     // new Directive();
-    this.fragment = document.createDocumentFragment();
     this._compileNode(this.$el);
-    // this.$el.innerHTML = '';
-    // this.fragment.childNodes.forEach((child) => {
-    //     this.$el.appendChild(child.cloneNode(true));
-    // })
+
 };
 
 
@@ -38,8 +35,6 @@ exports._compileNode = function (node) {
  * @private
  */
 exports._compileElement = function (node) {
-    this.currentNode = document.createElement(node.tagName);
-    this.fragment.appendChild(this.currentNode);//todo 多层处理，现在只有一层
     if (node.hasChildNodes()) {
         Array.from(node.childNodes).forEach(this._compileNode, this);
     }
@@ -51,7 +46,8 @@ exports._compileElement = function (node) {
  * @private
  */
 exports._compileText = function (node) {
-    let nodeValue = node.nodeValue;
+    let tokens =
+   /* let nodeValue = node.nodeValue;
 
     if (!nodeValue || nodeValue === '') return;
 
@@ -80,7 +76,7 @@ exports._compileText = function (node) {
 
     _.remove(node);//删除原来的DOM
     //node.nodeValue = nodeValue;
-    // this.currentNode.appendChild(document.createTextNode(nodeValue));
+    // this.currentNode.appendChild(document.createTextNode(nodeValue));*/
 
 };
 
