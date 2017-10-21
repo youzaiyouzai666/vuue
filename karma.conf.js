@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sun Oct 08 2017 19:03:43 GMT+0800 (中国标准时间)
+// Generated on Wed Oct 18 2017 14:47:38 GMT+0800 (中国标准时间)
 
 module.exports = function (config) {
     config.set({
@@ -10,20 +10,50 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'requirejs'],
+        frameworks: ['mocha'],
 
 
         // list of files / patterns to load in the browser
-        files: [],
+        files: [
+            'test/**/*test.js'
+        ],
 
 
         // list of files to exclude
-        exclude: [],
+        exclude: [
+            'Enter empty string to move to the next question.'
+        ],
 
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {},
+        preprocessors: {
+            'test/**/*.spec.js': ['webpack']
+        },
+
+        webpack: {
+            module   : {
+                rules: [
+                    {
+                        test   : /.js$/,
+                        use    : {
+                            loader: "babel-loader",
+                        },
+                        exclude: /node_modules/
+                    },
+                ]
+            },
+        },
+        webpackServer: {
+            noInfo: true // prevent console spamming when running in Karma!
+        },
+        plugins: [
+            'karma-chai',
+            'karma-mocha',
+            'karma-webpack',
+        ],
+
+
 
 
         // test results reporter to use
