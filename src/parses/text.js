@@ -1,3 +1,8 @@
+/**
+ * eg：对于 “姓名: {{name}}劳斯莱斯”，来返回三个对象
+ * @param text
+ * @returns {Array}
+ */
 export default function parse(text) {
     let tokens    = [];//内部属性包括{tag:是否是变量,value:值}
     const tagRE   = /\{?\{\{(.+?)\}\}\}?/g;//非贪婪模式匹配{}

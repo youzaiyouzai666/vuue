@@ -1,6 +1,6 @@
 import * as _ from '../util/index';
 import Directive from '../directive';
-// import textParser from '../parses/text';
+import textParser from '../parses/text';
 
 const NODE_TYPE_ELE  = 1;
 const NODE_TYPE_TEXT = 3;
@@ -40,6 +40,7 @@ exports._compileElement = function (node) {
     }
 };
 
+
 /**
  * 更新DOM  在{{}}的dom前添加 空text元素，给这个空元素赋值
  * @param node
@@ -47,38 +48,34 @@ exports._compileElement = function (node) {
  */
 exports._compileText = function (node) {
     let nodeValue = node.nodeValue;
-
     if (!nodeValue || nodeValue === '') return;
 
-    const patt = /{{[\w|/.]+}}/g;
-    let ret    = nodeValue.match(patt);
-    if (!ret) return;
+    const tokens = textParser(nodeValue);
+    if (!tokens) return;
 
-    ret.forEach(value => {
-        let el = document.createTextNode('');
-        node.parentNode.insertBefore(el, node);//todo 此处只对整个文本作用域处理，
-        let property = value.replace(/[{}]/g, '');
-        // let attr     = property.split('.');
-        // for (let i = 0; i < attr.length; i++) {
-        //     debugger;
-        //     const FIREST = 0;
-        //     if (i === FIREST) {
-        //         property = this.$data[attr[i]];
-        //     } else {
-        //         property = property[attr[i]];
-        //     }
-        //
-        // }
-        // nodeValue = nodeValue.replace(value, property);
-        this._bindDirective(property,el);
+    //对于 “姓名: {{name}}劳斯莱斯”，创建3个node，来进行处理
+    tokens.forEach(token => {
+        if (token.tag) {//指令节点
+            let value = token.value;
+            let el    = document.createTextNode('');
+            _.before(el, node);
+            this._bindDirective(value, el);
+        } else {//文本节点
+            let el = document.createTextNode(token.value);
+            _.before(el, node);
+        }
     }, this);
 
-    _.remove(node);//删除原来的DOM
-    //node.nodeValue = nodeValue;
-    // this.currentNode.appendChild(document.createTextNode(nodeValue));
+    _.remove(node);
 
 };
 
+/**
+ * 创建directive,
+ * @param expression 模板中{{value}}中value
+ * @param node  {{value}}实现的node
+ * @private
+ */
 exports._bindDirective = function (expression, node) {
     let dirs = this._directives;
     dirs.push(

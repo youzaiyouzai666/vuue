@@ -16,8 +16,6 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'index.js'
-            // 'src/**/*.js',
-            // 'test/**/*.js'
         ],
 
 
@@ -29,11 +27,10 @@ module.exports = function (config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             './index.js': ['webpack', 'sourcemap']
-            // 'test/**/*.js':['webpack'],
-            // 'src/**/*.js': ['webpack','sourcemap','coverage'],
         },
-        webpack: {
-            module   : {
+
+        webpack      : {
+            module: {
                 rules: [
                     {
                         test   : /\.js$/,
@@ -51,11 +48,11 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress','coverage'],
+        reporters: ['progress', 'coverage'],
 
         // add
         coverageReporter: {
-            type : 'html',
+            type: 'html',
             dir : 'coverage/'
         },
 
