@@ -10,9 +10,9 @@ const testCases = [
     },
     {
         // basic
-        text    : 'a{{ a }}c',
+        text    : 'a{{a}} c',
         expected: [
-            {tag: false, value: 'a '},
+            {tag: false, value: 'a'},
             {tag: true, value: 'a',},
             {tag: false, value: ' c'}
         ]
@@ -22,7 +22,7 @@ const testCases = [
         text    : '{{ text }} and {{{ html }}}',
         expected: [
             {tag: true, value: 'text'},
-            {tag: false, value: 'and'},
+            {tag: false, value: ' and '},
             {tag: true, value: 'html'}
         ]
     },
@@ -41,7 +41,7 @@ function assertParse(test) {
     var res = parseText(test.text);
     var exp = test.expected;
 
-    if (exp.length <= 1) {
+    if (exp.length) {
         res.forEach(function (v, i) {
             expect(v.value).to.be.equal(exp[i].value);
             if(v.tag) expect(v.tag).to.be.equal(exp[i].tag);
@@ -55,6 +55,7 @@ function assertParse(test) {
 
 }
 
+//只处理{{}}中的前后空格
 describe('Test parser', function () {
     it('parse', function () {
         testCases.forEach(assertParse);

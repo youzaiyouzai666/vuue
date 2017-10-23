@@ -18,7 +18,7 @@ export default function parse(text) {
         //2.处理{{}}内代码
         tokens.push({
             tag  : true,
-            value: match[1].trim(),//[1]表示第一个分组
+            value: match[1].trim(),//[1]表示第一个分组 只处理{{}}中的前后空格
         });
 
         lastIndex = tagRE.lastIndex;//下一次匹配开始的位置

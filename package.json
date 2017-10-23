@@ -5,6 +5,7 @@
   "main": "src/index",
   "scripts": {
     "start": "webpack-dev-server --open",
+    "build": "webpack",
     "watch": "webpack --watch",
     "unit": "cross-env NODE_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit"
