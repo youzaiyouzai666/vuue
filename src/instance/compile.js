@@ -1,6 +1,6 @@
 import * as _ from '../util/index';
 import Directive from '../directive';
-import textParser from '../parses/text';
+// import textParser from '../parses/text';
 
 const NODE_TYPE_ELE  = 1;
 const NODE_TYPE_TEXT = 3;
@@ -46,8 +46,7 @@ exports._compileElement = function (node) {
  * @private
  */
 exports._compileText = function (node) {
-    let tokens =
-   /* let nodeValue = node.nodeValue;
+    let nodeValue = node.nodeValue;
 
     if (!nodeValue || nodeValue === '') return;
 
@@ -76,7 +75,7 @@ exports._compileText = function (node) {
 
     _.remove(node);//删除原来的DOM
     //node.nodeValue = nodeValue;
-    // this.currentNode.appendChild(document.createTextNode(nodeValue));*/
+    // this.currentNode.appendChild(document.createTextNode(nodeValue));
 
 };
 
