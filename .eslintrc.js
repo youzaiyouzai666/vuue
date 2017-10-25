@@ -11,6 +11,7 @@ module.exports = {
     rules        : {
         // 禁用 console
         "no-console"                : 1,
+        "no-debugger"               : 1,
         //设置缩进为4个字符
         "indent"                    : [2, 4, {"SwitchCase": 1}],
         //强制文件最大行数
@@ -32,7 +33,7 @@ module.exports = {
         //禁止重新声明变量
         "no-redeclare"              : 2,
         //禁止使用魔术数字
-        "no-magic-numbers"          : ["error", { "ignoreArrayIndexes": true }],
+        "no-magic-numbers"          : ["error", {"ignoreArrayIndexes": true}],
         //禁止删除变量
         "no-delete-var"             : 2,
         //需要把立即执行的函数包裹起来

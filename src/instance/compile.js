@@ -78,7 +78,10 @@ exports._compileText = function (node) {
  */
 exports._bindDirective = function (expression, node) {
     let dirs = this._directives;
-    dirs.push(
-        new Directive(node, this, expression)
-    )
+    let directive = new Directive(node, this, expression);
+    dirs.push(directive);
+
+    let directives =  this._rootBinding[expression]._subs ||  (this._rootBinding[expression]._subs=[]);
+
+    directives.push(directive);//todo 只处理一层
 };
