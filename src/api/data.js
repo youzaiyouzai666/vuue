@@ -5,4 +5,4 @@ import Watcher from '../watcher';
 
 exports.$watch = function(){
     new Watcher();
-}
+};

@@ -11,17 +11,11 @@ exports._updateBindingAt = function () {
     r._subs.forEach((directive) =>{
         directive.update();
     });
-
-
-    // this._directives.forEach((directive) => {
-    //     if (directive.expression !== path) return;
-    //     directive.update();
-    // });
 };
 
 exports._initBindings = function () {
     this._rootBinding = new Binding();
-    this.observer.on('set', this._updateBindingAt.bind(this));
+    this._observer.on('set', this._updateBindingAt.bind(this));
 
     //设置 _rootBinding
     const obj = this.$data;

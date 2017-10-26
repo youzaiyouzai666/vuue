@@ -6,7 +6,7 @@
 const ARRAY  = 0;
 const OBJECT = 1;
 
-class Observer {
+export default class Observer {
     /**
      *
      * @param value
@@ -18,6 +18,14 @@ class Observer {
             this.link(value);
         } else if (type === OBJECT) {
             this.walk(value);
+        }
+    }
+
+    static create(value) {
+        if (Array.isArray(value)) {
+            return new Observer(value, ARRAY);
+        } else if (typeof value === 'object') {
+            return new Observer(value, OBJECT);
         }
     }
 
@@ -81,10 +89,11 @@ class Observer {
     emit(event, ...arg) {
         this._cbs     = this._cbs || {};
         let callbacks = this._cbs[event];
+        debugger;
         if (!callbacks) return;
         callbacks = callbacks.slice();
         callbacks.forEach((ob, i) => {
-            callbacks[i].apply(this, arg);
+            callbacks[i].apply(null, arg);
         })
     }
 
@@ -96,22 +105,4 @@ class Observer {
         let ob = parent.ob;
         ob.notify(event, ...arg);*/
     }
-
 }
-
-/**
- *
- * warn 这是个坑，class中 static方法 不能被遍历出来
- * @param value
- * @returns {Observer}
- */
-Observer.create = function (value) {
-    if (Array.isArray(value)) {
-        return new Observer(value, ARRAY);
-    } else if (typeof value === 'object') {
-        return new Observer(value, OBJECT);
-    }
-};
-
-
-module.exports = Observer;
