@@ -9,7 +9,7 @@ exports._updateBindingAt = function () {
         r = r[key];
     });
     r._subs.forEach((directive) =>{
-        directive.update();
+        directive._update();
     });
 };
 

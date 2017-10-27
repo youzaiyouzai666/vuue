@@ -15,22 +15,31 @@ export default class Directive {
         this.vm         = vm;
         this.expression = expression;
         this.attr       = 'nodeValue';
-        this.bind();
-        this.update();
+        this._bind();
+        this._update();
     }
 
-    bind() {
+    _bind() {
         if(!this.expression) return;
 
         this._watcher = new Watcher(
-
+            this.vm,
+            this.expression,
+            this._update(),
+            this
         );
     }
 
     /**
      * 更新DOM
      */
-    update() {
-        this.el[this.attr] = this.vm.$data[this.expression];
+    _update() {
+        let properties = this.expression.split('.');
+        let value = this.vm.$data;
+        properties.forEach((property)=>{
+            value = value[property];
+        });
+
+        this.el[this.attr] =value;
     }
 }

@@ -3,9 +3,9 @@ const app = new Vuue({
     data: {
         name   : 'caoyi',
         age    : 18,
-        // address: {
-        //     city: '北京'
-        // }
+        address: {
+            city: '北京'
+        }
     }
 });
 window.app = app;

@@ -53,6 +53,7 @@ exports._compileText = function (node) {
     const tokens = textParser(nodeValue);
     if (!tokens) return;
 
+
     //对于 “姓名: {{name}}劳斯莱斯”，创建3个node，来进行处理
     tokens.forEach(token => {
         if (token.tag) {//指令节点
@@ -77,12 +78,12 @@ exports._compileText = function (node) {
  * @private
  */
 exports._bindDirective = function (expression, node) {
-    // let dirs = this._directives;
+    let dirs = this._directives;
     let directive = new Directive(node, this, expression);
-    // dirs.push(directive);
+    dirs.push(directive);
 
-    this._createBingingAt(expression);
+    // this._createBingingAt(expression);
     // let directives =  this._rootBinding[expression]._subs ||  (this._rootBinding[expression]._subs=[]);
-    //
+    // //
     // directives.push(directive);//todo 只处理一层
 };
