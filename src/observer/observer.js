@@ -89,7 +89,6 @@ export default class Observer {
     emit(event, ...arg) {
         this._cbs     = this._cbs || {};
         let callbacks = this._cbs[event];
-        debugger;
         if (!callbacks) return;
         callbacks = callbacks.slice();
         callbacks.forEach((ob, i) => {

@@ -3,6 +3,6 @@
  */
 import Watcher from '../watcher';
 
-exports.$watch = function(){
-    new Watcher();
+exports.$watch = function(exp, cb){
+    new Watcher(this, exp, cb, this);
 };

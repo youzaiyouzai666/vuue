@@ -25,7 +25,7 @@ export default class Directive {
         this._watcher = new Watcher(
             this.vm,
             this.expression,
-            this._update(),
+            this._update,
             this
         );
     }

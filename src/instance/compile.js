@@ -15,7 +15,6 @@ exports._compile = function () {
 
 };
 
-
 exports._compileNode = function (node) {
     switch (node.nodeType) {
         case NODE_TYPE_ELE:
@@ -39,7 +38,6 @@ exports._compileElement = function (node) {
         Array.from(node.childNodes).forEach(this._compileNode, this);
     }
 };
-
 
 /**
  * 更新DOM  在{{}}的dom前添加 空text元素，给这个空元素赋值
@@ -82,8 +80,4 @@ exports._bindDirective = function (expression, node) {
     let directive = new Directive(node, this, expression);
     dirs.push(directive);
 
-    // this._createBingingAt(expression);
-    // let directives =  this._rootBinding[expression]._subs ||  (this._rootBinding[expression]._subs=[]);
-    // //
-    // directives.push(directive);//todo 只处理一层
 };

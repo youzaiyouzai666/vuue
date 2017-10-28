@@ -8,4 +8,5 @@ const app = new Vuue({
         }
     }
 });
+
 window.app = app;

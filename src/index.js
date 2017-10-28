@@ -13,7 +13,9 @@ Vuue.prototype = {
     ...require('./instance/compile'),
     ...require('./instance/bindings'),
     ...require('./instance/scope'),
+    
     ...require('./api/lifecycle'),
+    ...require('./api/data'),
 
 };
 

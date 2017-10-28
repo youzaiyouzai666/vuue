@@ -8,22 +8,14 @@ exports._updateBindingAt = function () {
     pathAry.forEach((key) => {
         r = r[key];
     });
-    r._subs.forEach((directive) =>{
-        directive._update();
+    r._subs.forEach((watcher) =>{
+        watcher.ctx._update();//todo
     });
 };
 
 exports._initBindings = function () {
     this._rootBinding = new Binding();
     this._observer.on('set', this._updateBindingAt.bind(this));
-
-    //设置 _rootBinding
-    const obj = this.$data;
-    for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            this._createBingingAt(key);
-        }
-    }
 };
 
 exports._createBingingAt = function (path) {
@@ -31,7 +23,7 @@ exports._createBingingAt = function (path) {
     const pathAry = path.split('.');
 
     pathAry.forEach((key) => {
-        b[key] = b._addChild(key);//层级绑定 b就是一个临时变量
+        b[key] = b._addChild(key);//层级绑定 b就是一个临时变量， 每一个属性都是 binding对象
         b      = b[key];
     });
     return b;
