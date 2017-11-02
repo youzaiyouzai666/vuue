@@ -9,7 +9,7 @@ exports._updateBindingAt = function () {
         r = r[key];
     });
     r._subs.forEach((watcher) =>{
-        watcher.ctx._update();//todo
+        watcher.update();
     });
 };
 

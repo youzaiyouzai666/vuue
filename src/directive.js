@@ -25,15 +25,16 @@ export default class Directive {
         this._watcher = new Watcher(
             this.vm,
             this.expression,
-            this._update,
+            this._update.bind(this),
             this
         );
     }
 
     /**
-     * 更新DOM
+     * 更新DOM,核心更新方法
      */
     _update() {
+        debugger;
         let properties = this.expression.split('.');
         let value = this.vm.$data;
         properties.forEach((property)=>{
@@ -41,5 +42,6 @@ export default class Directive {
         });
 
         this.el[this.attr] =value;
+        console.log(`更新了DOM-${this.expression}`, value);
     }
 }

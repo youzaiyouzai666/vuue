@@ -76,7 +76,7 @@ exports._compileText = function (node) {
  * @private
  */
 exports._bindDirective = function (expression, node) {
-    let dirs = this._directives;
+    let dirs      = this._directives;
     let directive = new Directive(node, this, expression);
     dirs.push(directive);
 

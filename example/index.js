@@ -8,5 +8,8 @@ const app = new Vuue({
         }
     }
 });
+app.$watch('age',function(){
+    console.log('$watch==age改变了');
 
+});
 window.app = app;
