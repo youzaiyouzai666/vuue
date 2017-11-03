@@ -1,9 +1,11 @@
 exports._init = function (options) {
-    this.$data = options.data;
-    this.$el   = document.querySelector(options.el);//得到dom
+    this.$options = options;
+    this.$data    = options.data;
+    this.$el      = document.querySelector(options.el);//得到dom
 
     //通过 observer 对data数据进行监听，并且提供订阅某个数据项的变化
     this._initData(this.$data);
+    this._initComputed();
 
     //初始化 _rootBinding 并绑定回调事件
     this._initBindings();

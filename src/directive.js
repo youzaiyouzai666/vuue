@@ -34,7 +34,6 @@ export default class Directive {
      * 更新DOM,核心更新方法
      */
     _update() {
-        debugger;
         let properties = this.expression.split('.');
         let value = this.vm.$data;
         properties.forEach((property)=>{

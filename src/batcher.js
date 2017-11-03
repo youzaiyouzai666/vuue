@@ -30,7 +30,6 @@ export default class Batcher {
      * 执行 并清空事件队列
      */
     flush() {
-        debugger;
         this.queue.forEach((job) => {
             job.cb.call(job.ctx);
         });

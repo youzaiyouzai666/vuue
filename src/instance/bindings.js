@@ -15,7 +15,8 @@ exports._updateBindingAt = function () {
 
 exports._initBindings = function () {
     this._rootBinding = new Binding();
-    this._observer.on('set', this._updateBindingAt.bind(this));
+    this._observer.on('set', this._updateBindingAt.bind(this))
+        .on('get',this._collectDep.bind(this));
 };
 
 exports._createBingingAt = function (path) {
@@ -27,4 +28,7 @@ exports._createBingingAt = function (path) {
         b      = b[key];
     });
     return b;
+};
+exports._collectDep = function(){
+
 };
