@@ -7,6 +7,7 @@ const ARRAY  = 0;
 const OBJECT = 1;
 
 export default class Observer {
+    static  emitGet = false;
     /**
      *
      * @param value
@@ -66,6 +67,9 @@ export default class Observer {
             enumerable  : true,
             configurable: true,
             get         : function () {
+                if(Observer.emitGet){
+                    ob.notify('get',key);
+                }
                 return val;
             },
             set         : function (newVal) {

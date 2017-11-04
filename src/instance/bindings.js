@@ -1,18 +1,5 @@
 import Binding from "../binding";
 
-exports._updateBindingAt = function () {
-    const path    = arguments[0];
-    const pathAry = path.split('.');
-
-    let r = this._rootBinding;
-    pathAry.forEach((key) => {
-        r = r[key];
-    });
-    r._subs.forEach((watcher) =>{
-        watcher.update();
-    });
-};
-
 exports._initBindings = function () {
     this._rootBinding = new Binding();
     this._observer.on('set', this._updateBindingAt.bind(this))
@@ -29,6 +16,22 @@ exports._createBingingAt = function (path) {
     });
     return b;
 };
-exports._collectDep = function(){
+exports._updateBindingAt = function () {
+    const path    = arguments[0];
+    const pathAry = path.split('.');
 
+    let r = this._rootBinding;
+    pathAry.forEach((key) => {
+        r = r[key];
+    });
+    r._subs.forEach((watcher) =>{
+        watcher.update();
+    });
+};
+
+exports._collectDep = function(path){
+    let watcher = this._activeWatcher;
+    if(watcher){
+        watcher.addDep(path);
+    }
 };

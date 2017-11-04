@@ -2,6 +2,8 @@
  * Created by CAOYI on 2017/10/24.
  */
 import Batcher from './batcher';
+import Observer from './observer/observer';
+import * as expParser from './parses/expression';
 
 let uid     = 0;
 let batcher = new Batcher();
@@ -20,7 +22,20 @@ export default class Watcher {
         this.expression = expression;
         this.cb         = cb; //回调函数
         this.ctx        = ctx || vm; //回调函数执行上下文
-        this.addDep(expression);
+        this.getter = expParser.compileGetter(expression);
+        this.initDeps(expression);
+    }
+
+    initDeps(path) {
+        this.addDep(path);
+
+        Observer.emitGet = true;
+        this.vm._activeWatcher = this;
+
+        this.getter.call(this.vm, this.vm.$data);
+
+        Observer.emitGet = false;
+        this.vm._activeWatcher = null;
     }
 
     addDep(path) {
