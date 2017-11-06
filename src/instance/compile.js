@@ -5,6 +5,10 @@ import textParser from '../parses/text';
 const NODE_TYPE_ELE  = 1;
 const NODE_TYPE_TEXT = 3;
 
+const priorityDirs = [
+    'if'
+];
+
 /**
  * 更新DOM
  * @private
@@ -34,6 +38,11 @@ exports._compileNode = function (node) {
  * @private
  */
 exports._compileElement = function (node) {
+    let hasAttributes = node.hasAttributes();
+
+    if (hasAttributes && this._checkPriorityDirs(node)) {
+        return;
+    }
     if (node.hasChildNodes()) {
         Array.from(node.childNodes).forEach(this._compileNode, this);
     }
@@ -80,4 +89,14 @@ exports._bindDirective = function (expression, node) {
     let directive = new Directive(node, this, expression);
     dirs.push(directive);
 
+};
+
+exports._checkPriorityDirs = function (node) {
+    priorityDirs.forEach((dir) => {
+        let value = _.attr(node, dir);
+        if (value) {
+            this._bindDirective(value,node);
+            return true;
+        }
+    })
 };

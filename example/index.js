@@ -1,6 +1,7 @@
 const app = new Vuue({
-    el  : '#app',
-    data: {
+    el      : '#app',
+    data    : {
+        show   : false,
         name   : 'caoyi',
         age    : 18,
         address: {
@@ -13,13 +14,13 @@ const app = new Vuue({
         }
     }
 });
-app.$watch('age',function(){
+app.$watch('age', function () {
     console.log('$watch==age改变了');
 
 });
-app.test = function () {
+app.test   = function () {
     this.$data.name = 'caoyi11111';
-    this.$data.age = 100;
+    this.$data.age  = 100;
     this.$data.name = 'caoyi22222';
 };
 window.app = app;
