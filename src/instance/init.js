@@ -1,5 +1,9 @@
+import * as _ from '../util/index';
+
 exports._init = function (options) {
     this.$options = options;
+    _.extend(this.$options, this.constructor.options);
+
     this.$data    = options.data;
     this.$el      = document.querySelector(options.el);//得到dom
 

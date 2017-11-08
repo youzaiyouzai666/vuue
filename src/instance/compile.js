@@ -54,6 +54,7 @@ exports._compileElement = function (node) {
  * @private
  */
 exports._compileText = function (node) {
+    debugger;
     let nodeValue = node.nodeValue;
     if (!nodeValue || nodeValue === '') return;
 
@@ -67,7 +68,7 @@ exports._compileText = function (node) {
             let value = token.value;
             let el    = document.createTextNode('');
             _.before(el, node);
-            this._bindDirective(value, el);
+            this._bindDirective('text', value, el);
         } else {//文本节点
             let el = document.createTextNode(token.value);
             _.before(el, node);
@@ -80,13 +81,14 @@ exports._compileText = function (node) {
 
 /**
  * 创建directive,
+ * @param type
  * @param expression 模板中{{value}}中value
  * @param node  {{value}}实现的node
  * @private
  */
-exports._bindDirective = function (expression, node) {
+exports._bindDirective = function (type, expression, node) {
     let dirs      = this._directives;
-    let directive = new Directive(node, this, expression);
+    let directive = new Directive(type, node, this, expression);
     dirs.push(directive);
 
 };
@@ -95,7 +97,7 @@ exports._checkPriorityDirs = function (node) {
     priorityDirs.forEach((dir) => {
         let value = _.attr(node, dir);
         if (value) {
-            this._bindDirective(value,node);
+            this._bindDirective(dir, value, node);
             return true;
         }
     })
