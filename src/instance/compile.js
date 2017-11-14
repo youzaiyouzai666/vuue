@@ -54,7 +54,6 @@ exports._compileElement = function (node) {
  * @private
  */
 exports._compileText = function (node) {
-    debugger;
     let nodeValue = node.nodeValue;
     if (!nodeValue || nodeValue === '') return;
 

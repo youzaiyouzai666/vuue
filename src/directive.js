@@ -23,8 +23,16 @@ export default class Directive {
         this._bind();
     }
 
+    _initDef(){
+        debugger;
+        let def = this.vm.$options.directives[this.type];
+        _.extend(this, def);//引入 特定的处理
+    }
+
     _bind() {
         if (!this.expression) return;
+
+        this.bind  && this.bind();
 
         this._watcher = new Watcher(
             this.vm,
@@ -36,10 +44,7 @@ export default class Directive {
         this.update(this._watcher.value);
     }
 
-    _initDef(){
-        let def = this.vm.$options.directives[this.type];
-        _.extend(this, def);
-    }
+
 
     /**
      * 更新DOM,核心更新方法

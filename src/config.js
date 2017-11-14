@@ -1,7 +1,6 @@
 /**
  * Created by CAOYI on 2017/11/6.
  */
-const config = {
+export default {
     prefix: 'v-'
 };
-export default config;
