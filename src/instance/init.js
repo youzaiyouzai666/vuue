@@ -4,8 +4,7 @@ exports._init = function (options) {
     this.$options = options;
     _.extend(this.$options, this.constructor.options);
 
-    this.$data    = options.data;
-    this.$el      = document.querySelector(options.el);//得到dom
+    this.$data    = options.data || {};
 
     //通过 observer 对data数据进行监听，并且提供订阅某个数据项的变化
     this._initData(this.$data);
@@ -21,6 +20,6 @@ exports._init = function (options) {
          *  1 解析DOM模板，通过data渲染模板
          *  2 解析DOM模板，生成directive,并push到 this._directives
          */
-        this.$mount();
+        this.$mount(options.el);
     }
 };

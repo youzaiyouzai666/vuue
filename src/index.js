@@ -4,7 +4,7 @@
  * @constructor
  */
 import directives from './directives/index';
-//import * as _ from './util/index';
+import * as _ from './util/index';
 // import init from './instance/init';
 
 function Vuue(options) {
@@ -18,6 +18,7 @@ Vuue.prototype = {
     ...require('./instance/compile'),
     ...require('./instance/bindings'),
     ...require('./instance/scope'),
+    ...require('./instance/element'),
     
     ...require('./api/lifecycle'),
     ...require('./api/data'),
@@ -27,4 +28,4 @@ Vuue.options = {
     directives: directives
 };
 
-module.exports = window.Vuue = Vuue;//todo 这个全局变量这么写太low了
+module.exports = window.Vuue = _.Vuue = Vuue;//todo 这个全局变量这么写太low了

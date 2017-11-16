@@ -24,7 +24,6 @@ export default class Directive {
     }
 
     _initDef(){
-        debugger;
         let def = this.vm.$options.directives[this.type];
         _.extend(this, def);//引入 特定的处理
     }
@@ -40,6 +39,7 @@ export default class Directive {
             this._update.bind(this),
             this
         );
+        debugger;
         //自己手动update了
         this.update(this._watcher.value);
     }
@@ -49,7 +49,8 @@ export default class Directive {
     /**
      * 更新DOM,核心更新方法
      */
-    _update() {
-        this.update()
+    _update(value, oldValue) {
+        debugger;
+        this.update(value, oldValue)
     }
 }

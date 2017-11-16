@@ -1,7 +1,7 @@
 const app = new Vuue({
     el      : '#app',
     data    : {
-        show   : false,
+        show   : true,
         name   : 'caoyi',
         age    : 18,
         address: {

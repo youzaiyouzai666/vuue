@@ -22,26 +22,47 @@ export default class Watcher {
         this.expression = expression;
         this.cb         = cb; //回调函数
         this.ctx        = ctx || vm; //回调函数执行上下文
-        this.getter = expParser.compileGetter(expression);
+        this.getter     = expParser.compileGetter(expression);
+        this.value      = '';
+
         this.initDeps(expression);
     }
 
     initDeps(path) {
         this.addDep(path);
+        this.value = this.get();
+    }
 
-        Observer.emitGet = true;
+    /**
+     * getter.call是完成计算属性的核心,
+     * 因为正是这里的getter.call, 执行了该计算属性的getter方法,
+     * 从而执行该计算属性所依赖的原始原型的get方法
+     * 从而发出get事件,冒泡到底层, 触发collectDep事件
+     */
+    get(){
+        Observer.emitGet       = true;
         this.vm._activeWatcher = this;
+        debugger;
+        let value = this.getter.call(this.vm, this.vm.$data);
 
-        this.getter.call(this.vm, this.vm.$data);
-
-        Observer.emitGet = false;
+        Observer.emitGet       = false;
         this.vm._activeWatcher = null;
+
+        return value;
     }
 
     addDep(path) {
         let vm      = this.vm;
         let binding = vm._createBingingAt(path);
         binding._addSub(this);
+    }
+
+    run(){
+        debugger;
+        let value = this.get();
+        let oldValue = this.value;
+        this.value = value;
+        this.cb.call(this.ctx, value, oldValue);
     }
 
     update() {
