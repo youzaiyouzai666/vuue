@@ -39,10 +39,10 @@ export default class Watcher {
      * 从而执行该计算属性所依赖的原始原型的get方法
      * 从而发出get事件,冒泡到底层, 触发collectDep事件
      */
-    get(){
+    get() {
         Observer.emitGet       = true;
         this.vm._activeWatcher = this;
-        debugger;
+
         let value = this.getter.call(this.vm, this.vm.$data);
 
         Observer.emitGet       = false;
@@ -57,14 +57,15 @@ export default class Watcher {
         binding._addSub(this);
     }
 
-    run(){
-        debugger;
-        let value = this.get();
+    //执行 并准备参数
+    run() {
+        let value    = this.get();
         let oldValue = this.value;
-        this.value = value;
-        this.cb.call(this.ctx, value, oldValue);
+        this.value   = value;
+        this.cb.call(this.ctx, value, oldValue);//准备参数参数
     }
 
+    //添加延时加载
     update() {
         // this.cb.call(this.ctx, arguments);
         batcher.push(this);

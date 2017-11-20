@@ -4,6 +4,10 @@
 import Watcher from "./watcher";
 import * as _ from "./util";
 
+/**
+ * Directive 与./src/directive 组合使用
+ * 核心分为  bind与 update 两个生命周期
+ */
 export default class Directive {
     /**
      * 通过缓存DOM对象，在改变data时，通过dom的引用来更新DOM
@@ -23,11 +27,19 @@ export default class Directive {
         this._bind();
     }
 
+    /**
+     * 引入 ./src/directive 中匹配的
+     * @private
+     */
     _initDef(){
         let def = this.vm.$options.directives[this.type];
         _.extend(this, def);//引入 特定的处理
     }
 
+    /**
+     * 生命周期 bind
+     * @private
+     */
     _bind() {
         if (!this.expression) return;
 
@@ -39,18 +51,16 @@ export default class Directive {
             this._update.bind(this),
             this
         );
-        debugger;
         //自己手动update了
         this.update(this._watcher.value);
     }
 
-
-
     /**
+     * 生命周期 update
      * 更新DOM,核心更新方法
+     * watcher  run()方法调用，并传递参数过来
      */
     _update(value, oldValue) {
-        debugger;
         this.update(value, oldValue)
     }
 }

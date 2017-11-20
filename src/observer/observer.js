@@ -61,7 +61,7 @@ export default class Observer {
      * @param key
      * @param val
      */
-    convert(key, val) {
+    convert(key, val) {//形成闭包
         const ob = this;
         Object.defineProperty(this.value, key, {
             enumerable  : true,
