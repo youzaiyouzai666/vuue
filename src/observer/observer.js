@@ -96,7 +96,7 @@ export default class Observer {
         if (!callbacks) return;
         callbacks = callbacks.slice();
         callbacks.forEach((ob, i) => {
-            callbacks[i].apply(null, arg);
+            callbacks[i]. (null, arg);
         })
     }
 
