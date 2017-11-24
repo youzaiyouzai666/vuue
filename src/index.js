@@ -22,6 +22,7 @@ Vuue.prototype = {
     
     ...require('./api/lifecycle'),
     ...require('./api/data'),
+    ...require('./api/dom')
 
 };
 Vuue.options = {

@@ -9,6 +9,8 @@ const priorityDirs = [
     'if'
 ];
 
+let _id = 0;
+
 /**
  * 更新DOM
  * @private
@@ -66,10 +68,11 @@ exports._compileText = function (node) {
         if (token.tag) {//指令节点
             let value = token.value;
             let el    = document.createTextNode('');
+
             _.before(el, node);
             this._bindDirective('text', value, el);
         } else {//文本节点
-            let el = document.createTextNode(token.value);
+            let el = document.createTextNode(_id++ + token.value);
             _.before(el, node);
         }
     }, this);

@@ -2,9 +2,14 @@ import * as _ from '../util/index';
 
 exports._init = function (options) {
     this.$options = options;
+    this.$parent  = options.parent;
     _.extend(this.$options, this.constructor.options);
 
-    this.$data    = options.data || {};
+    if( this.$parent){
+        this.$data    = this.$parent.$data || {};
+    }else{
+        this.$data    = options.data || {};
+    }
 
     //通过 observer 对data数据进行监听，并且提供订阅某个数据项的变化
     this._initData(this.$data);

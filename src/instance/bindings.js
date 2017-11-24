@@ -24,6 +24,9 @@ exports._updateBindingAt = function () {
     pathAry.forEach((key) => {
         r = r[key];
     });
+    if(!r){
+        return;
+    }
     r._subs.forEach((watcher) =>{
         watcher.update();
     });

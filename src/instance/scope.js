@@ -4,7 +4,11 @@
 import Observer from '../observer/observer';
 
 exports._initData = function (data) {
-    this._observer = Observer.create(data);
+    if(this.$parent){
+        this._observer = this.$parent._observer;
+    }else{
+        this._observer = Observer.create(data);
+    }
 };
 
 /**
